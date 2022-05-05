@@ -1,6 +1,6 @@
 <template>
-  <q-layout view="hHh lpR fFf">
-    <q-header elevated class=" bg-main text-white q-px-lg q-py-sm">
+  <q-layout>
+    <q-header elevated class=" bg-primary text-white q-px-lg q-py-sm">
       <div class="row items-center">
         <div>
           <q-img contain :src="'/logo.png'" style="height: 60px; width:60px;" />

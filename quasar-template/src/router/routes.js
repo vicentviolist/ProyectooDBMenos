@@ -39,6 +39,30 @@ const routes = [
               ),
           },
           {
+            path: 'home',
+            name: 'home',
+            component: () =>
+              import(
+                /* webpackChunkName: "dashboard" */ 'pages/Dashboard/Clientes/Home.vue'
+              ),
+          },
+          {
+            path: 'clientes',
+            name: 'clientes',
+            component: () =>
+              import(
+                /* webpackChunkName: "dashboard" */ 'pages/Dashboard/Clientes/Clientes.vue'
+              ),
+          },
+          {
+            path: 'agregarCliente',
+            name: 'AddCliente',
+            component: () =>
+              import(
+                /* webpackChunkName: "dashboard" */ 'pages/Dashboard/Clientes/AddCliente.vue'
+              ),
+          },
+          {
             path: 'bulk-load',
             name: 'bulkLoad',
             component: () =>

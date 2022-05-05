@@ -1,36 +1,8 @@
 import { transformToParamsString, emitOnlyValues } from '../utils/api.helpers';
 import { api } from 'src/boot/axios';
-import * as AmplifyModules from 'aws-amplify';
 export default {
-  async get(path, payload, configAux) {
+  async get(path, payload) {
     try {
-      let token = '';
-      if (
-        process.env.USE_SAML === 'false' ||
-        typeof process.env.USE_SAML === 'undefined'
-      ) {
-        let userAuth = await AmplifyModules.Auth.currentAuthenticatedUser();
-        token = userAuth.signInUserSession.accessToken.jwtToken;
-      }
-
-      let localConfig;
-
-      if (path === '/get/me' || process.env.DEV) {
-        localConfig = {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        };
-      } else {
-        localConfig = {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        };
-      }
-
-      let config = { ...localConfig, ...configAux };
-
       let query = '';
 
       if (payload) {
@@ -38,7 +10,7 @@ export default {
       }
       return new Promise((resolve, reject) => {
         api
-          .get(path + query, config)
+          .get(path + query)
           .then(response => {
             resolve(response);
           })
@@ -53,20 +25,6 @@ export default {
 
   async post(path, payload) {
     try {
-      let token = '';
-      if (
-        process.env.USE_SAML === 'false' ||
-        typeof process.env.USE_SAML === 'undefined'
-      ) {
-        let userAuth = await AmplifyModules.Auth.currentAuthenticatedUser();
-        token = userAuth.signInUserSession.accessToken.jwtToken;
-      }
-      let config = {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      };
-
       let query = '';
       if (payload) {
         query = transformToParamsString(payload.query);
@@ -92,7 +50,6 @@ export default {
         process.env.USE_SAML === 'false' ||
         typeof process.env.USE_SAML === 'undefined'
       ) {
-        let userAuth = await AmplifyModules.Auth.currentAuthenticatedUser();
         token = userAuth.signInUserSession.accessToken.jwtToken;
       }
       let localConfig = {
