@@ -1,5 +1,5 @@
 var express = require("express");
-var mysql = require("mysql");
+var mysql = require("mysql2");
 
 var app = express();
 
@@ -7,7 +7,7 @@ var conexion = mysql.createConnection({
   host: "localhost",
   user: "root",
   database: "DBMenosTest",
-  password: "",
+  password: "12345678",
 });
 
 conexion.connect(function (error) {
