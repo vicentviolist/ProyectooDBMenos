@@ -1,0 +1,9 @@
+// con la clase e-input solo se busca afectar los inputs custom
+.e-input {
+  .q-field {
+    &__label {
+      margin-left: -10px;
+      margin-top: -22px;
+    }
+  }
+}

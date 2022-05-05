@@ -1,0 +1,14 @@
+@import './quasar.variables.scss';
+:root {
+  --q-color-main: #{$main};
+}
+
+.text-main {
+  color: $main !important;
+  color: var(--q-color-main) !important;
+}
+
+.bg-main {
+  background: $main !important;
+  background: var(--q-color-main) !important;
+}
