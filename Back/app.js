@@ -36,6 +36,17 @@ app.get("/api/clientes", (req, res) => {
   });
 });
 
+// Trae los pagos
+app.get("/api/pagos", (req, res) => {
+  conexion.query("SELECT * FROM Pagos", (error, filas) => {
+    if (error) {
+      throw error;
+    } else {
+      res.send(filas);
+    }
+  });
+});
+
 // Trae usuario por id
 app.get("/api/clientes/:id", (req, res) => {
   conexion.query(
@@ -53,21 +64,70 @@ app.get("/api/clientes/:id", (req, res) => {
 
 // Crear un nuevoo cliente
 app.post("/api/clientes", (req, res) => {
-  let data = {
-    id: req.body.id,
-    nombre: req.body.nombre,
-    telefono: req.body.telefono,
-    ultimo_pago: req.body.ultimo_pago,
-    fecha_creacion: req.body.fecha_creacion,
+  let date = new Date();
+  var hora =
+    date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+  var fechaYHora = date.toISOString().split("T")[0] + " " + hora;
+  let payload = {
+    nombre: req.query.nombre,
+    telefono: req.query.telefono,
+    ultimo_pago: req.query.ultimo_pago,
+    fecha_creacion: fechaYHora,
   };
   let sql = "INSERT INTO Clientes SET ?";
-  conexion.query(sql, data, function (error, result) {
+  conexion.query(sql, payload, function (error, result) {
     if (error) {
       throw error;
     } else {
       res.send(result);
     }
   });
+});
+
+//Añade pago
+app.post("/api/Pagos", (req, res) => {
+  let date = new Date();
+  var hora =
+    date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+  var fechaYHora = date.toISOString().split("T")[0] + " " + hora;
+  let payload = {
+    Monto: req.query.monto,
+    Fecha_De_Pago: fechaYHora,
+  };
+  let sql = "INSERT INTO Pagos SET ?";
+  conexion.query(sql, payload, function (error, result) {
+    if (error) {
+      throw error;
+    } else {
+      res.send(result);
+    }
+  });
+});
+
+// Editar cliente
+app.put("/api/clientes/:id", (req, res) => {
+  let date = new Date();
+  var hora =
+    date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+  var fechaYHora = date.toISOString().split("T")[0] + " " + hora;
+  let id = req.params.id;
+  let nombre = req.body.nombre;
+  let telefono = req.body.telefono;
+  let ultimo_pago = req.body.ultimo_pago;
+  let fecha_creacion = fechaYHora;
+  let sql =
+    "UPDATE Clientes SET nombre = ?, telefono = ?, ultimo_pago = ?, fecha_creacion = ? WHERE id = ?";
+  conexion.query(
+    sql,
+    [nombre, telefono, ultimo_pago, fecha_creacion, id],
+    function (error, result) {
+      if (error) {
+        throw error;
+      } else {
+        res.send(result);
+      }
+    }
+  );
 });
 
 const puerto = "4000";

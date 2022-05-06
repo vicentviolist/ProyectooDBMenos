@@ -31,7 +31,7 @@ export default {
       }
       return new Promise((resolve, reject) => {
         api
-          .post(path + query, payload, config)
+          .post(path + query, payload)
           .then(response => {
             resolve(response.data);
           })

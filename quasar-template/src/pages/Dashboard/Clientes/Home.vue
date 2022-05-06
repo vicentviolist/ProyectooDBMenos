@@ -45,7 +45,7 @@ export default {
       this.$router.push({ name: 'AddCliente' }).catch(e => console.log(e));
     },
     repP() {
-      this.$router.push({ name: 'reportePedidos' }).catch(e => console.log(e));
+      this.$router.push({ name: 'AddPago' }).catch(e => console.log(e));
     },
   },
 };

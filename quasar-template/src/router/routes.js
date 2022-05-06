@@ -2,25 +2,6 @@ const routes = [
   {
     path: '/',
     component: () =>
-      import(/* webpackChunkName: "login" */ 'layouts/MainLayout.vue'),
-    children: [
-      {
-        path: '',
-        name: 'login',
-        component: () =>
-          import(/* webpackChunkName: "login" */ 'pages/MainPage.vue'),
-      },
-      {
-        path: 'forgotPassword',
-        name: 'forgotPassword',
-        component: () =>
-          import(/* webpackChunkName: "forgot" */ 'pages/ForgotPassword.vue'),
-      },
-    ],
-  },
-  {
-    path: '/dashboard',
-    component: () =>
       import(/* webpackChunkName: "dashboard" */ 'layouts/DashboardLayout.vue'),
     children: [
       {
@@ -39,7 +20,7 @@ const routes = [
               ),
           },
           {
-            path: 'home',
+            path: '/',
             name: 'home',
             component: () =>
               import(
@@ -60,6 +41,14 @@ const routes = [
             component: () =>
               import(
                 /* webpackChunkName: "dashboard" */ 'pages/Dashboard/Clientes/AddCliente.vue'
+              ),
+          },
+          {
+            path: 'agregarPago',
+            name: 'AddPago',
+            component: () =>
+              import(
+                /* webpackChunkName: "dashboard" */ 'pages/Dashboard/Clientes/AddPago.vue'
               ),
           },
           {

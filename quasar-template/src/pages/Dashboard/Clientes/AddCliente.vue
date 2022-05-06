@@ -22,22 +22,26 @@
                   v-model="filterData.nombre"
                   rounded
                   outlined
+                  required
                 />
               </div>
               <div class="col-xl-3 col-lg-3 col-md-4 col-12">
                 <q-input
                   label="Telefono"
                   v-model="filterData.telefono"
+                  numeric
+                  mask="##########"
                   rounded
                   outlined
+                  required
                 />
               </div>
               <div class="col-xl-2 col-lg-3 col-md-4 col-12">
-                <q-input
-                  label="Ultimo Pago"
+                <e-calendar
+                  placeholder="Ultimo Pago"
+                  label="Ultimo pago"
                   v-model="filterData.ultimo_pago"
-                  rounded
-                  outlined
+                  required
                 />
               </div>
               <div class="col-md-2 col-lg-2 col-12 offset-md-4  offset-lg-8">
@@ -86,10 +90,12 @@ export default {
     async handleSearch() {
       try {
         this.loading = true;
-        let res = await this.$store.dispatch('clientes/getClientesLista');
-        console.log(res.data, 'res');
+        let payload = { query: { ...this.filterData } };
+        let res = await this.$store.dispatch('clientes/postClientePadre', payload);
+        this.showMsg('ok', 'Cliente creado con exito');
         this.data = res.data;
         this.loading = false;
+        this.clear();
       } catch (error) {
         this.showMsg('error', error);
       }
