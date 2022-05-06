@@ -1,0 +1,1 @@
+INSERT INTO DBMenosTest.Clientes (id, nombre, telefono, ultimo_pago, fecha_creacion) VALUES (1, 'Vicente Olivares', '5624952104', '05-05-2022', '2022-05-06 19:31:27');

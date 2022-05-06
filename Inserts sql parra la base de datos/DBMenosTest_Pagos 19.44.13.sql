@@ -1,0 +1,1 @@
+INSERT INTO DBMenosTest.Pagos (id, Monto, Fecha_De_Pago) VALUES (1, 190000, '2022-05-06 19:32:2');
